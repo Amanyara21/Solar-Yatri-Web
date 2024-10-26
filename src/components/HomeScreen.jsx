@@ -26,9 +26,6 @@ function HomePage() {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                console.log('====================================');
-                console.log(user);
-                console.log('====================================');
                 const response = await axios.get(
                     'https://solar-yatri-backend.vercel.app/api/projects',
                     {

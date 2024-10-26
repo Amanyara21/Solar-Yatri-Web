@@ -17,6 +17,7 @@ export const ChatBot = () => {
     error(...args);
   };
   const [user, setUser]= useState(null);
+  const [projects, setProjects]= useState(null);
   const [userInput, setUserInput] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
 
@@ -30,7 +31,17 @@ export const ChatBot = () => {
         setUser(response.data.user);
         console.log('====================================');
     }
+    const getProjects=async()=>{
+      const response = await axios.get('https://solar-yatri-backend.vercel.app/api/projects', {
+                headers: { Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MWMyNmVmNzI0NDk4ZDhiZjgxMzM4YiIsInVzZXJUeXBlIjoidXNlciIsImlhdCI6MTcyOTg5OTY3NSwiZXhwIjoxNzYxNDM1Njc1fQ.4dxjIK2xMkBRB5mLbKQ6BmS95G2A6tDy5atHwaIv_g4" }
+            });
+
+        console.log('====================================');
+        setProjects(response.data);
+        console.log('====================================');
+    }
     getUser()
+    getProjects()
 },[])
 
   const handleUserInput = (value) => {
@@ -44,26 +55,22 @@ export const ChatBot = () => {
     if (messageText.trim() === "") return;
   
     try {
-      const userPreferences = user
-        ? `User Preferences - Name: ${user.name}, Email: ${user.email}, Household Size: ${user.houseHoldSize}, Income: ${user.income}, Location: ${user.location}, Monthly Electricity Usage: ${user.monthlyElectricityUsage}`
-        : "No user preferences available.";
-  
-      const prompt = `Imagine you have expertise in solar power plant project researcher. ${user.toString()} Based on this preferences, answer the queries given by user: ${messageText}`;
-      
-      console.log('====================================');
-      console.log(prompt);
-      console.log('====================================');
+      const prompt = `Imagine you have expertise in solar power plant project researcher.`+ JSON.stringify(user)+` Based on this preferences, and i have these projects ` + JSON.stringify(projects)+` answer the queries given by user: ${messageText} and return in short format.`;
+    
   
       const result = await model.generateContent(prompt);
       const response = result.response;
-      const text = response.text();
+      
+      let text = response.text();
+      text = text.replace(/\*/g, '');
+      text = text.replace(/\$/g, '₹'); 
+
       setChatHistory((prev) => [
         ...prev,
         { type: "user", message: messageText },
         { type: "bot", message: text },
       ]);
       setUserInput("");
-      console.log(text);
     } catch (e) {
       console.log("Error occurred while fetching", e);
     }

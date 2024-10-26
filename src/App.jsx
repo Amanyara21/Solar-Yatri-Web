@@ -10,7 +10,7 @@ import Listing from "./components/Dashboard/Listing";
 import DashPage from "./components/Dashboard/DashPage";
 import DetailPage from "./components/Dashboard/CompleteDetail";
 import HomePage from "./components/HomeScreen";
-import UserOrders from "./components/userOrders";
+import UserOrders from "./components/UserOrders";
 import {ChatBot} from "./components/ChatBot";
 import AddProject from "./components/AddProject";
 
