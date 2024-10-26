@@ -78,7 +78,7 @@ export const ChatBot = () => {
   
 
   return (
-    <div style={{ position: "relative", height: "500px" }}>
+    <div className="relative h-screen">
       <MainContainer>
         <ChatContainer>
           <MessageList>
