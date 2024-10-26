@@ -16,6 +16,11 @@ function DetailPage() {
         );
     }
 
+    const totalInvestmentRequired = project.totalCapacity;
+    const totalInvested = project.invested;
+    const amountRequired = totalInvestmentRequired - totalInvested;
+    const stockLeftPercentage = ((totalInvestmentRequired - totalInvested) / totalInvestmentRequired) * 100;
+
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-8">
             <button onClick={() => navigate(-1)} className="mb-4 bg-blue-600 text-white py-2 px-4 rounded">
@@ -25,7 +30,7 @@ function DetailPage() {
                 <h2 className="text-2xl font-bold mb-4 text-black dark:text-white">{project.projectName}</h2>
                 <p className='text-black dark:text-white'><strong>Location:</strong> {project.projectLocation}</p>
                 <p className='text-black dark:text-white'><strong>Type:</strong> {project.projectType}</p>
-                <p className='text-black dark:text-white'><strong>Total Capacity:</strong> {project.totalCapacity}</p>
+                <p className='text-black dark:text-white'><strong>Investment Required:</strong> {totalInvestmentRequired}</p> 
                 <p className='text-black dark:text-white'><strong>Energy Production:</strong> {project.energyProduction}</p>
                 <p className='text-black dark:text-white'><strong>Carbon Offset:</strong> {project.carbonOffset}</p>
                 <p className='text-black dark:text-white'><strong>Min Investment:</strong> {project.minInvestmentAmount}</p>
@@ -33,6 +38,10 @@ function DetailPage() {
                 <p className='text-black dark:text-white'><strong>Solar Panel Type:</strong> {project.solarPanelType}</p>
                 <p className='text-black dark:text-white'><strong>Grid Connectivity:</strong> {project.gridConnectivity}</p>
                 <p className='text-black dark:text-white'><strong>Battery Storage:</strong> {project.batteryStorage}</p>
+                <p className='text-black dark:text-white'><strong>Total Investment Done:</strong> {totalInvested}</p>
+                
+                <p className='text-black dark:text-white'><strong>Amount Required:</strong> {amountRequired}</p>
+                <p className='text-black dark:text-white'><strong>Percentage of Stock Left:</strong> {stockLeftPercentage.toFixed(2)}%</p>
             </div>
         </div>
     );
