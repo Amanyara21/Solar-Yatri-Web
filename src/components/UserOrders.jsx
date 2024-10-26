@@ -43,6 +43,7 @@ function UserOrders() {
                             <p className="text-gray-700 dark:text-gray-400">Share Percentage: {order.percentageShare}%</p>
                             <p className="text-gray-700 dark:text-gray-400">Energy Production Per Minute: {order.energy_production_per_minute}</p>
                             <p className="text-gray-700 dark:text-gray-400">Carbon Offset per minute: {order.co2_saved_per_minute}</p>
+                            <p className="text-gray-700 dark:text-gray-400">Energy Saving: {order.energy_saving}</p>
                         </div>
                     ))
                 ) : (
